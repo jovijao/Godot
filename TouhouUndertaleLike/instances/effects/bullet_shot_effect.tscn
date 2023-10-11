@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm6dascwa4cxv"]
+
+[ext_resource type="Texture2D" uid="uid://ccwo1ijvu3jsg" path="res://textures/effects/ball8px.png" id="1_vgqte"]
+[ext_resource type="Script" path="res://scripts/effect.gd" id="2_g52a0"]
+
+[sub_resource type="Curve" id="Curve_h0q5n"]
+max_value = 1.2
+_data = [Vector2(0, 0.505263), 0.0, 0.0, 0, 0, Vector2(0.0824176, 1.2), 0.0, 0.0, 0, 0, Vector2(1, 0.410526), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_o6qsk"]
+offsets = PackedFloat32Array(0, 0.119205, 1)
+colors = PackedColorArray(1, 1, 1, 0.0338112, 1, 1, 1, 0.603922, 1, 1, 1, 0)
+
+[node name="BulletShotEffect" type="CPUParticles2D"]
+emitting = false
+amount = 1
+one_shot = true
+speed_scale = 2.0
+texture = ExtResource("1_vgqte")
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_h0q5n")
+color_ramp = SubResource("Gradient_o6qsk")
+script = ExtResource("2_g52a0")

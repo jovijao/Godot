@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://l1kk1yyg56mh"]
+
+[ext_resource type="Texture2D" uid="uid://dqvalumshbopj" path="res://textures/encounter/tiledBackground.png" id="1_5e6al"]
+
+[node name="EncounterBackground" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Default" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5e6al")
+stretch_mode = 1

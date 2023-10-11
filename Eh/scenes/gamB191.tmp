@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cskp7mahegw64"]
+
+[ext_resource type="Script" path="res://scripts/Room.gd" id="1_8gk43"]
+[ext_resource type="Script" path="res://scripts/Game.gd" id="1_c33lo"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_c33lo")
+
+[node name="Room" type="Node2D" parent="."]
+script = ExtResource("1_8gk43")

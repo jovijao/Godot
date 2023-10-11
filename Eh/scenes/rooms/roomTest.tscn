@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://bj7x62lbduius"]
+
+[ext_resource type="Script" path="res://scripts/Room.gd" id="1_8pwv1"]
+[ext_resource type="Texture2D" uid="uid://ce7eelxnwh8ti" path="res://icon.svg" id="2_vb1k8"]
+[ext_resource type="Script" path="res://scripts/InteractiveObject.gd" id="3_dufek"]
+[ext_resource type="Texture2D" uid="uid://swsbxya3hciw" path="res://textures/player.png" id="4_rhpae"]
+[ext_resource type="PackedScene" uid="uid://lxtbhecq35an" path="res://instances/events/dialog_event.tscn" id="5_a8nxo"]
+[ext_resource type="Script" path="res://scripts/EventArea.gd" id="6_fljfe"]
+[ext_resource type="PackedScene" uid="uid://bxktlvagdmxrs" path="res://instances/events/change_room_event.tscn" id="7_ptsnq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_searh"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ftxn"]
+size = Vector2(16, 16)
+
+[node name="Room" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_8pwv1")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(72, 8)
+scale = Vector2(1, 4)
+texture = ExtResource("2_vb1k8")
+offset = Vector2(0, 64)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(24, 72)
+script = ExtResource("3_dufek")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("4_rhpae")
+offset = Vector2(0, -14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_searh")
+
+[node name="DialogEvent" parent="StaticBody2D" instance=ExtResource("5_a8nxo")]
+timeline = "test"
+
+[node name="EventArea" type="Area2D" parent="."]
+position = Vector2(24, 8)
+script = ExtResource("6_fljfe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea"]
+shape = SubResource("RectangleShape2D_8ftxn")
+
+[node name="ChangeRoomEvent" parent="EventArea" instance=ExtResource("7_ptsnq")]
+room = "test"

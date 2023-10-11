@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cio8kvwfwrbbf"]
+
+[ext_resource type="Script" path="res://scripts/instances/gun_shot.gd" id="1_6vbmu"]
+
+[node name="GunShot" type="Node2D"]
+script = ExtResource("1_6vbmu")

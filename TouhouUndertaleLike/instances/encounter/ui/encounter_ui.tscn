@@ -1,0 +1,148 @@
+[gd_scene load_steps=8 format=3 uid="uid://t5srffvsh43j"]
+
+[ext_resource type="Script" path="res://scripts/encounter/encounter_interface.gd" id="1_hp458"]
+[ext_resource type="PackedScene" uid="uid://dwgtthfwqp7pt" path="res://instances/encounter/ui/battle_button.tscn" id="2_dgy8d"]
+[ext_resource type="Texture2D" uid="uid://dhlqgwwvf0tbd" path="res://textures/ui/button-skill.png" id="3_hxtpa"]
+[ext_resource type="Texture2D" uid="uid://c2361g0ovrtsj" path="res://textures/ui/button-defend.png" id="4_t4mib"]
+[ext_resource type="Texture2D" uid="uid://cerqsvim6ir75" path="res://textures/ui/button-item.png" id="5_6ypy7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pu83g"]
+bg_color = Color(0.207843, 0.101961, 0.101961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qh8qi"]
+bg_color = Color(0.996094, 0.210938, 0.339844, 1)
+
+[node name="EncounterUi" type="CanvasLayer"]
+
+[node name="Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_hp458")
+metadata/_edit_lock_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="Interface"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.815
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.04001
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Interface/CenterContainer"]
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar" type="ProgressBar" parent="Interface/CenterContainer/Panel"]
+layout_mode = 2
+anchor_top = 0.125
+anchor_right = 1.0
+anchor_bottom = 0.25
+offset_left = 8.0
+offset_right = -8.0
+theme_override_styles/background = SubResource("StyleBoxFlat_pu83g")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qh8qi")
+max_value = 20.0
+step = 1.0
+value = 20.0
+show_percentage = false
+
+[node name="CenterContainer" type="CenterContainer" parent="Interface/CenterContainer/Panel/ProgressBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.083
+anchor_top = 2.0
+anchor_right = 1.083
+anchor_bottom = 6.0
+offset_left = -0.0319996
+offset_top = -8.0
+offset_right = 0.0319977
+offset_bottom = 8.0
+
+[node name="GridContainer" type="GridContainer" parent="Interface/CenterContainer/Panel/ProgressBar/CenterContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 2
+columns = 5
+
+[node name="SkillButton" parent="Interface/CenterContainer/Panel/ProgressBar/CenterContainer/GridContainer" instance=ExtResource("2_dgy8d")]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Interface/CenterContainer/Panel/ProgressBar/CenterContainer/GridContainer/SkillButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_hxtpa")
+
+[node name="DefendButton" parent="Interface/CenterContainer/Panel/ProgressBar/CenterContainer/GridContainer" instance=ExtResource("2_dgy8d")]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Interface/CenterContainer/Panel/ProgressBar/CenterContainer/GridContainer/DefendButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_t4mib")
+
+[node name="ItemButton" parent="Interface/CenterContainer/Panel/ProgressBar/CenterContainer/GridContainer" instance=ExtResource("2_dgy8d")]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Interface/CenterContainer/Panel/ProgressBar/CenterContainer/GridContainer/ItemButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_6ypy7")
+
+[node name="CenterContainer2" type="CenterContainer" parent="Interface"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -200.0
+
+[node name="HealthBar" type="ProgressBar" parent="Interface/CenterContainer2"]
+self_modulate = Color(1, 1, 1, 0.607843)
+custom_minimum_size = Vector2(96, 6)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_pu83g")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qh8qi")
+max_value = 20.0
+step = 1.0
+value = 20.0
+show_percentage = false
+
+[connection signal="pressed" from="Interface/CenterContainer/Panel/ProgressBar/CenterContainer/GridContainer/SkillButton" to="Interface" method="_on_skill_button_pressed"]
+[connection signal="pressed" from="Interface/CenterContainer/Panel/ProgressBar/CenterContainer/GridContainer/DefendButton" to="Interface" method="_on_defend_button_pressed"]
+[connection signal="pressed" from="Interface/CenterContainer/Panel/ProgressBar/CenterContainer/GridContainer/ItemButton" to="Interface" method="_on_item_button_pressed"]

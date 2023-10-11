@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2ahkb52nwrxj"]
+
+[ext_resource type="Script" path="res://scripts/instances/gun_trail.gd" id="1_hdk0w"]
+
+[node name="GunTrail" type="Line2D"]
+z_index = 1
+width = 2.0
+script = ExtResource("1_hdk0w")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

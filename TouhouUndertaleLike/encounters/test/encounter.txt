@@ -1,0 +1,10 @@
+PROJECTILES {
+	x: speed: 80, size: 8;
+	y: speed: 20, size: 20, initialSpeed: 128;
+};
+
+ENEMY: {};
+
+
+
+ATTACKS {};

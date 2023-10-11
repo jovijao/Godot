@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxwbt1e7pw1kl"]
+
+[ext_resource type="Script" path="res://scripts/encounter/arena.gd" id="1_puulj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rhxx5"]
+size = Vector2(480, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0djx0"]
+size = Vector2(48, 216)
+
+[node name="Arena" type="Node2D"]
+position = Vector2(192, 104)
+script = ExtResource("1_puulj")
+
+[node name="SoulHandle" type="Node2D" parent="."]
+
+[node name="Collision" type="Node2D" parent="."]
+
+[node name="Top" type="StaticBody2D" parent="Collision"]
+position = Vector2(0, -104)
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="Collision/Top"]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_rhxx5")
+
+[node name="Left" type="StaticBody2D" parent="Collision"]
+position = Vector2(-192, 0)
+collision_mask = 0
+
+[node name="Left" type="CollisionShape2D" parent="Collision/Left"]
+position = Vector2(-24, 4)
+shape = SubResource("RectangleShape2D_0djx0")
+
+[node name="Bottom" type="StaticBody2D" parent="Collision"]
+position = Vector2(0, 112)
+collision_mask = 0
+
+[node name="Bottom" type="CollisionShape2D" parent="Collision/Bottom"]
+position = Vector2(0, 24)
+shape = SubResource("RectangleShape2D_rhxx5")
+
+[node name="Right" type="StaticBody2D" parent="Collision"]
+position = Vector2(192, 0)
+collision_mask = 0
+
+[node name="Right" type="CollisionShape2D" parent="Collision/Right"]
+position = Vector2(24, 4)
+shape = SubResource("RectangleShape2D_0djx0")
+
+[node name="Attacks" type="Node" parent="."]
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node" parent="."]

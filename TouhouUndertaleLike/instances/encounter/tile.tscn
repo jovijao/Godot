@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dtjr6eu71un6g"]
+
+[node name="Tile" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(1, 1)
+color = Color(0.160784, 0.160784, 0.211765, 1)
+polygon = PackedVector2Array(0, 0, 0, 30, 30, 30, 30, 0)

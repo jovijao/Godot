@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://buu1fnop4wn48"]
+
+[ext_resource type="Script" path="res://scripts/Room.gd" id="1_3uhlm"]
+[ext_resource type="Texture2D" uid="uid://ce7eelxnwh8ti" path="res://icon.svg" id="2_vn6bt"]
+[ext_resource type="Script" path="res://scripts/InteractiveObject.gd" id="3_6t11e"]
+[ext_resource type="Texture2D" uid="uid://swsbxya3hciw" path="res://textures/player.png" id="4_3oh4x"]
+[ext_resource type="PackedScene" uid="uid://lxtbhecq35an" path="res://instances/events/dialog_event.tscn" id="5_33glc"]
+[ext_resource type="Script" path="res://scripts/EventArea.gd" id="6_50ae4"]
+[ext_resource type="PackedScene" uid="uid://bxktlvagdmxrs" path="res://instances/events/change_room_event.tscn" id="7_d4bo0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_searh"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ecprg"]
+size = Vector2(16, 16)
+
+[node name="Room" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_3uhlm")
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(0.219608, 0.219608, 0.219608, 1)
+position = Vector2(192, 0)
+scale = Vector2(3, 1.6875)
+texture = ExtResource("2_vn6bt")
+offset = Vector2(0, 64)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(136, 120)
+script = ExtResource("3_6t11e")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("4_3oh4x")
+offset = Vector2(0, -14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_searh")
+
+[node name="DialogEvent" parent="StaticBody2D" instance=ExtResource("5_33glc")]
+timeline = "test"
+
+[node name="EventArea" type="Area2D" parent="."]
+position = Vector2(24, 8)
+script = ExtResource("6_50ae4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea"]
+shape = SubResource("RectangleShape2D_ecprg")
+
+[node name="ChangeRoomEvent" parent="EventArea" instance=ExtResource("7_d4bo0")]
+room = "test2"

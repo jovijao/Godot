@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5bkctvnh5x4q"]
+
+[ext_resource type="Script" path="res://scripts/encounter/Encounter.gd" id="1_bfmi5"]
+[ext_resource type="PackedScene" uid="uid://l1kk1yyg56mh" path="res://instances/encounter/ui/encounter_background.tscn" id="1_jgr0a"]
+[ext_resource type="PackedScene" uid="uid://dxwbt1e7pw1kl" path="res://instances/encounter/arena.tscn" id="2_0xqd2"]
+[ext_resource type="PackedScene" uid="uid://t5srffvsh43j" path="res://instances/encounter/ui/encounter_ui.tscn" id="3_37pbe"]
+
+[node name="Encounter" type="Control" node_paths=PackedStringArray("interfaceHandler", "arena")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bfmi5")
+interfaceHandler = NodePath("EncounterUi")
+arena = NodePath("Arena")
+
+[node name="EncounterBackground" parent="." instance=ExtResource("1_jgr0a")]
+layout_mode = 1
+
+[node name="Arena" parent="." instance=ExtResource("2_0xqd2")]
+
+[node name="EncounterUi" parent="." instance=ExtResource("3_37pbe")]

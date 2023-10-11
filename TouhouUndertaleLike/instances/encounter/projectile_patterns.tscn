@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjif6egcfo7ji"]
+
+[ext_resource type="Script" path="res://scripts/encounter/projectilePatterns.gd" id="1_y17bc"]
+
+[node name="ProjectilePattern" type="Node"]
+script = ExtResource("1_y17bc")

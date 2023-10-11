@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://cskp7mahegw64"]
+
+[ext_resource type="Script" path="res://scripts/Room.gd" id="1_8gk43"]
+[ext_resource type="Script" path="res://scripts/Game.gd" id="1_c33lo"]
+[ext_resource type="Texture2D" uid="uid://cyduk241d6qry" path="res://icon.svg" id="3_epgtb"]
+[ext_resource type="PackedScene" uid="uid://b84bc7ryqk3m6" path="res://instances/player/player.tscn" id="4_5n4t3"]
+[ext_resource type="PackedScene" uid="uid://bbqq7fst4x4el" path="res://instances/enemies/enemy.tscn" id="5_5628g"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_c33lo")
+
+[node name="Room" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("1_8gk43")
+
+[node name="Icon" type="Sprite2D" parent="Room"]
+position = Vector2(77, 43)
+texture = ExtResource("3_epgtb")
+
+[node name="Player" parent="Room" instance=ExtResource("4_5n4t3")]
+position = Vector2(55, 39)
+
+[node name="Enemy" parent="Room" instance=ExtResource("5_5628g")]
+position = Vector2(124, 81)

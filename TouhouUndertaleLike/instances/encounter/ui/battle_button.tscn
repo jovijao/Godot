@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwgtthfwqp7pt"]
+
+[ext_resource type="Texture2D" uid="uid://damhke0ac76c4" path="res://textures/ui/button.png" id="1_rc8xx"]
+[ext_resource type="Texture2D" uid="uid://btuqn0egknt20" path="res://textures/ui/buttonPressed.png" id="2_y70ux"]
+[ext_resource type="Texture2D" uid="uid://ctmye7k25fg70" path="res://textures/ui/buttonHover.png" id="3_uahac"]
+
+[node name="BattleButton" type="TextureButton"]
+anchors_preset = -1
+anchor_right = 0.047
+anchor_bottom = 0.148
+offset_right = -18.048
+offset_bottom = -31.968
+texture_normal = ExtResource("1_rc8xx")
+texture_pressed = ExtResource("2_y70ux")
+texture_hover = ExtResource("3_uahac")
