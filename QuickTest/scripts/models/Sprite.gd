@@ -5,3 +5,5 @@ func _init():
 	texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 	alpha_cut = SpriteBase3D.ALPHA_CUT_DISCARD
 	shaded = true
+	
+#	scale.y = 1.25

@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://2u7njat7nbic"]
+[gd_scene load_steps=10 format=3 uid="uid://2u7njat7nbic"]
 
 [ext_resource type="Script" path="res://scripts/models/Room.gd" id="1_pq8rm"]
+[ext_resource type="Script" path="res://scripts/models/Player.gd" id="2_2ipig"]
 [ext_resource type="Script" path="res://scripts/models/Camera.gd" id="2_m0stb"]
 [ext_resource type="Script" path="res://scripts/models/Sprite.gd" id="3_eoa3h"]
 [ext_resource type="Texture2D" uid="uid://bp4whct3iwx6" path="res://textures/player/idle.png" id="3_sjckr"]
@@ -26,23 +27,31 @@ script = ExtResource("1_pq8rm")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
 size = Vector3(50, 1, 50)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Room"]
 environment = SubResource("Environment_ijqtt")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("2_2ipig")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("CapsuleShape3D_0fvj4")
 
-[node name="Camera" type="Camera3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5.65685, 5.65685)
+[node name="Camera" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5.09117, 4.80833)
+size = 12.0
 script = ExtResource("2_m0stb")
 
-[node name="Sprite" type="Sprite3D" parent="CharacterBody3D"]
+[node name="Sprite" type="Sprite3D" parent="Player"]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 0, 0, 0)
 offset = Vector2(0, 16)
 pixel_size = 0.05
+billboard = 2
 texture = ExtResource("3_sjckr")
 script = ExtResource("3_eoa3h")
