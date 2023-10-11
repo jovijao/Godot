@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://2u7njat7nbic"]
+
+[ext_resource type="Script" path="res://scripts/models/Room.gd" id="1_pq8rm"]
+[ext_resource type="Script" path="res://scripts/models/Camera.gd" id="2_m0stb"]
+[ext_resource type="Script" path="res://scripts/models/Sprite.gd" id="3_eoa3h"]
+[ext_resource type="Texture2D" uid="uid://bp4whct3iwx6" path="res://textures/player/idle.png" id="3_sjckr"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ptlju"]
+sky_top_color = Color(0.301961, 0.466667, 0.698039, 1)
+
+[sub_resource type="Sky" id="Sky_3juny"]
+sky_material = SubResource("ProceduralSkyMaterial_ptlju")
+
+[sub_resource type="Environment" id="Environment_ijqtt"]
+background_mode = 2
+sky = SubResource("Sky_3juny")
+ambient_light_source = 3
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0fvj4"]
+height = 1.6
+
+[node name="Game" type="Node"]
+
+[node name="Room" type="Node3D" parent="."]
+script = ExtResource("1_pq8rm")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(50, 1, 50)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Room"]
+environment = SubResource("Environment_ijqtt")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CapsuleShape3D_0fvj4")
+
+[node name="Camera" type="Camera3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5.65685, 5.65685)
+script = ExtResource("2_m0stb")
+
+[node name="Sprite" type="Sprite3D" parent="CharacterBody3D"]
+offset = Vector2(0, 16)
+pixel_size = 0.05
+texture = ExtResource("3_sjckr")
+script = ExtResource("3_eoa3h")
