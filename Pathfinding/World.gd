@@ -13,7 +13,7 @@ var tile_textures = [
 	load("res://textures/water.png")
 ]
 
-var tile_cost = [
+var tile_costs = [
 	0,
 	8,
 	42,
