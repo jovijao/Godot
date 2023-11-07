@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqtujrs65ki24"]
+
+[ext_resource type="Texture2D" uid="uid://df4dsgvg2kjh5" path="res://textures/grass.png" id="1_6eo3q"]
+[ext_resource type="Script" path="res://instances/tile.gd" id="2_6ubt4"]
+
+[node name="Tile" type="Sprite2D"]
+texture = ExtResource("1_6eo3q")
+centered = false
+script = ExtResource("2_6ubt4")
+
+[node name="Button" type="Button" parent="."]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
