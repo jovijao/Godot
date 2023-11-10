@@ -13,8 +13,10 @@ script = ExtResource("1_pgv55")
 
 [node name="PlayButton" type="Button" parent="."]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 222.0
+offset_top = 94.0
+offset_right = 263.0
+offset_bottom = 125.0
 text = "Play"
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

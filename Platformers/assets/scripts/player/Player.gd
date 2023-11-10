@@ -21,6 +21,9 @@ var jumped = false
 var can_jump = true
 var can_dash = true
 
+var dash_quantity = 1
+var dashs_left = dash_quantity
+
 var state = 0
 
 func _physics_process(delta):
@@ -81,7 +84,11 @@ func may_jump():
 func may_dash():
 	if not can_dash: return
 	
-	if Input.is_action_just_pressed("special"):
+	if is_on_floor():
+		dashs_left = dash_quantity
+	
+	if Input.is_action_just_pressed("special") and dashs_left > 0:
+		dashs_left -= 1
 		state = 1
 		dash_timer.start()
 		
@@ -94,10 +101,9 @@ func _on_coyote_timer_timeout():
 
 func _on_dash_timer_timeout():
 	state = 0
-	velocity.y /= 16
-	velocity.x /= 8
+	velocity /= 4
 	dash_cooldown_timer.start()
-
+	can_dash = false
 
 func _on_dash_cooldown_timer_timeout():
 	can_dash = true
