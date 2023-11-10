@@ -8,7 +8,8 @@ extends CharacterBody2D
 @onready var sprite = $Sprite
 
 @export var speed = 120
-@export var friction = 20
+@export var default_friction = 16
+var friction = default_friction
 
 @export var gravity = 420
 @export var jump_force = -180
@@ -59,7 +60,15 @@ func may_walk(delta):
 		direction = input.normalized()
 		sprite.flip_h = input.x < 0
 	
-	velocity.x = lerp(velocity.x, round(input.x) * speed, friction * delta)
+	if is_on_floor(): friction = lerpf(friction, default_friction, 8 * delta)
+	else:             friction = lerpf(friction, default_friction/4, 4 * delta)
+	
+	
+	if is_on_floor():
+		velocity.x = lerp(velocity.x, round(input.x) * speed, friction * delta)
+	else:
+		if input != Vector2.ZERO: velocity.x = lerp(velocity.x, round(input.x) * speed, friction * delta)
+		else: velocity.x = lerp(velocity.x, 0.0, friction/4 * delta)
 
 
 func may_jump():
@@ -101,7 +110,12 @@ func _on_coyote_timer_timeout():
 
 func _on_dash_timer_timeout():
 	state = 0
-	velocity /= 4
+	
+	velocity.y /= 4
+	if !is_on_floor(): 
+		velocity.x /= 4
+		friction = 0
+	
 	dash_cooldown_timer.start()
 	can_dash = false
 

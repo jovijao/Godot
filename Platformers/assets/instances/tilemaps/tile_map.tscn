@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://rrod5x508gv"]
+
+[ext_resource type="Texture2D" uid="uid://drgf0xusy4hgo" path="res://assets/resources/textures/tiles/rock.png" id="1_rvvb1"]
+[ext_resource type="Texture2D" uid="uid://g5kdp8yoklrs" path="res://assets/resources/textures/tiles/grass.png" id="2_k6b1k"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7k0b"]
+texture = ExtResource("1_rvvb1")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8wrsd"]
+texture = ExtResource("2_k6b1k")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[sub_resource type="TileSet" id="TileSet_s6plv"]
+tile_size = Vector2i(8, 8)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_k7k0b")
+sources/1 = SubResource("TileSetAtlasSource_8wrsd")
+
+[node name="TileMap" type="TileMap"]
+tile_set = SubResource("TileSet_s6plv")
+format = 2
