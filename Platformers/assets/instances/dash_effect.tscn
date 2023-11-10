@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbep3p861ofwx"]
+
+[ext_resource type="Script" path="res://assets/scripts/instances/dash_effect.gd" id="1_0rhf3"]
+
+[sub_resource type="Curve" id="Curve_nfx2i"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.383495, 0.631579), -1.25101, -1.25101, 0, 0, Vector2(0.679612, 0.463158), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="DashEffect" type="Node2D"]
+script = ExtResource("1_0rhf3")
+
+[node name="Line" type="Line2D" parent="."]
+points = PackedVector2Array(0, -8)
+width_curve = SubResource("Curve_nfx2i")
+default_color = Color(1, 0.211765, 0.341176, 1)

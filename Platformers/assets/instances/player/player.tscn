@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://18er6ihb1e1b"]
+
+[ext_resource type="Script" path="res://assets/scripts/player/Player.gd" id="1_7wdft"]
+[ext_resource type="Texture2D" uid="uid://brtiufslxat5s" path="res://assets/resources/textures/player/soul.png" id="2_kb3r5"]
+[ext_resource type="Script" path="res://assets/scripts/models/Camera.gd" id="3_h7i4r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6oh2k"]
+size = Vector2(12, 16)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_7wdft")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_kb3r5")
+offset = Vector2(0, -8)
+hframes = 3
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_6oh2k")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(0, -24)
+position_smoothing_speed = 16.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.02
+drag_right_margin = 0.1
+drag_bottom_margin = 0.02
+script = ExtResource("3_h7i4r")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.16
+one_shot = true
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
