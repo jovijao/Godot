@@ -78,7 +78,7 @@ func may_walk(delta):
 	if is_on_floor(): friction = lerpf(friction, default_friction, 8 * delta)
 	else:             friction = lerpf(friction, default_friction/4, 4 * delta)
 	
-	velocity.x = lerp(velocity.x, round(input.x) * speed + + extra_speed, friction * delta)
+	velocity.x = lerp(velocity.x, round(input.x) * speed, friction * delta)
 
 
 func may_jump():
@@ -105,9 +105,12 @@ func may_wall_jump():
 	if is_on_floor(): return
 	if not can_wall_jump(): return
 	
+	
+	if velocity.y > 0: velocity.y /= 2
+	
 	if not jump_buffer.is_stopped(): 
 		velocity.y = jump_force * 0.8
-		velocity.x = - direction.x * 480
+		velocity.x = get_wall_direction().x * 480
 		
 		can_jump = false
 		jump_buffer.stop()
@@ -145,8 +148,11 @@ func may_dash():
 		add_child(dash_effect.instantiate())
 
 func can_wall_jump():
-	return ($RayCastWallLeft.is_colliding() or $RayCastWallRight.is_colliding()) and is_on_wall() 
+	return ($RayCastWallLeft.is_colliding() or $RayCastWallRight.is_colliding())# and is_on_wall() 
 
+func get_wall_direction():
+	if $RayCastWallLeft.is_colliding(): return Vector2.RIGHT
+	if $RayCastWallRight.is_colliding(): return Vector2.LEFT
 
 func _on_coyote_timer_timeout():
 	can_jump = false

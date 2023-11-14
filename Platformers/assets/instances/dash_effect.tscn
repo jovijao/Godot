@@ -10,6 +10,7 @@ point_count = 4
 script = ExtResource("1_0rhf3")
 
 [node name="Line" type="Line2D" parent="."]
+z_index = -1
 points = PackedVector2Array(0, -8)
 width_curve = SubResource("Curve_nfx2i")
 default_color = Color(1, 0.211765, 0.341176, 1)
