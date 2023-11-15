@@ -7,9 +7,8 @@ extends CharacterBody2D
 
 @onready var sprite = $Sprite
 
-@export var run_speed = 280
-@export var walk_speed = 140
-@onready var speed : float = run_speed
+
+@onready var speed : float = 300
 @export var default_friction : float = 16
 var friction : float = default_friction
 
@@ -32,6 +31,15 @@ var state : int = 0
 const max_fall_speed : float = 500
 const max_ascend_speed : float = -500
 
+var running_timer = 0.0
+var speed_gear = 0
+var speed_gears = [
+	0.4,
+	0.5,
+	0.75,
+	1.0
+]
+
 func _physics_process(delta):
 	match state:
 		0:
@@ -49,6 +57,8 @@ func _physics_process(delta):
 			
 			if Input.is_action_just_pressed("jump"):
 				jump_buffer.start(0.2)
+				
+			running_timer += delta
 
 
 func get_input_direction():
@@ -66,19 +76,39 @@ func may_walk(delta):
 	var extra_speed = max(0, velocity.length() - speed)
 	
 	print(
-		"Speed: %s, \nExtra speed: %s" %
+		"Speed: %s, \nExtra speed: %s \nRun timer: %s" %
 		
 		[ velocity.length(),
-		extra_speed])
+		extra_speed,
+		running_timer])
+	
+	var speed_target = speed * speed_gears[speed_gear]
+	
+	match speed_gear:
+		0:
+			if running_timer >= 1.0 or velocity.length() > speed_target: speed_gear += 1
+		1: 
+			if running_timer >= 3.0 or velocity.length() > speed_target: speed_gear += 1
+			if running_timer <= 1.0: speed_gear -= 1
+		2:
+			if running_timer >= 6.0  or velocity.length() > speed_target: speed_gear += 1
+			if running_timer <= 3.0: speed_gear -= 1
+		_: 
+			if running_timer <= 6.0: speed_gear -= 1
+		
 	
 	if input != Vector2.ZERO: 
 		direction = input.normalized()
 		sprite.flip_h = input.x < 0
+		
+	if velocity.length() > 40:
+		running_timer += delta
+	else: running_timer = lerpf(running_timer, 0, 4 * delta)
 	
 	if is_on_floor(): friction = lerpf(friction, default_friction, 8 * delta)
 	else:             friction = lerpf(friction, default_friction/4, 4 * delta)
 	
-	velocity.x = lerp(velocity.x, round(input.x) * speed, friction * delta)
+	velocity.x = lerp(velocity.x, round(input.x) * speed_target, friction * delta)
 
 
 func may_jump():
@@ -125,7 +155,10 @@ func may_dash():
 	
 	if Input.is_action_just_pressed("downwards_dash"):
 		if is_on_floor(): return
-		direction = Vector2.DOWN + Vector2(round(direction.x), 0)
+		
+		if Input.is_action_pressed("down"): direction = Vector2.DOWN
+		else: direction = Vector2.DOWN + Vector2(round(direction.x), 0)
+			
 		dashs_left -= 1
 		state = 1
 		can_jump = false
@@ -161,6 +194,9 @@ func _on_dash_timer_timeout():
 	state = 0
 	dash_cooldown_timer.start()
 	can_dash = false
+	
+	if get_input_direction().x == 1 and velocity.x < 0: velocity.x *= -1
+	elif get_input_direction().x == -1 and velocity.x > 0: velocity.x *= -1
 
 func _on_dash_cooldown_timer_timeout():
 	can_dash = true
